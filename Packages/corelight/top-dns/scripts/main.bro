@@ -1,4 +1,4 @@
-#Teams
+#Team
 @load base/utils/site
 @load base/frameworks/sumstats
 
@@ -12,7 +12,7 @@ export {
 	const logging_interval = 15mins &redef;
 
 	## If you would like to measure trimmed "effective domains".
-	## This will take something like "www.google.co.uk" and only 
+	## This will take something like "www.google.co.uk" and only
 	## use "google.co.uk" as the measured value.
 	const use_trimmed_domain = F &redef;
 
@@ -51,8 +51,8 @@ event bro_init() &priority=5
 	{
 	Log::create_stream(TopDNS::LOG, [$columns=Info, $path="top_dns"]);
 
-	local r1 = SumStats::Reducer($stream="top-dns-name", 
-	                             $apply=set(SumStats::TOPK), 
+	local r1 = SumStats::Reducer($stream="top-dns-name",
+	                             $apply=set(SumStats::TOPK),
 	                             $topk_size=top_k*10);
 	SumStats::create([$name="find-top-queries",
 	                  $epoch=logging_interval,
@@ -67,7 +67,7 @@ event bro_init() &priority=5
 	                  	local top_counts = index_vec();
 	                  	local top_epsilons = index_vec();
 	                  	local i = 0;
-	                  	for ( element in s ) 
+	                  	for ( element in s )
 	                  		{
 	                  		top_queries[|top_queries|] = s[element]$str;
 	                  		top_counts[|top_counts|] = topk_count(r$topk, s[element]);
@@ -77,11 +77,11 @@ event bro_init() &priority=5
 	                  			break;
 	                  		}
 
-	                  	Log::write(TopDNS::LOG, [$ts=ts, 
-	                  	                         $ts_delta=logging_interval, 
+	                  	Log::write(TopDNS::LOG, [$ts=ts,
+	                  	                         $ts_delta=logging_interval,
 	                  	                         $record_type=key$str,
 	                  	                         $top_queries=top_queries,
-	                  	                         $top_counts=top_counts, 
+	                  	                         $top_counts=top_counts,
 	                  	                         $top_epsilons=top_epsilons]);
 	                  	}
 	                 ]);
