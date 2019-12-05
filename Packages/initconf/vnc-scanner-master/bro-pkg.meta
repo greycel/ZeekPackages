@@ -1,0 +1,6 @@
+[package]
+description=Simple policy to detect VNC (RFB) scanners based on src->dst connection counts
+script_dir = scripts
+version = 0.1 
+tags = rfb, vnc, osx high sierra 
+test_command = ( cd tests && btest -d )

@@ -1,0 +1,7 @@
+*.tmp
+tags
+.state
+.btest.*
+*.IGNORE
+scripts/*.log
+todo
